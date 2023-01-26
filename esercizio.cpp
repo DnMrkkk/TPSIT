@@ -33,6 +33,8 @@ void inserimento(){
         getline(fin, parco1[i].categoria, ',');
         if(parco1[i].categoria[0] == '\n')
             parco1[i].categoria = parco1[i].categoria.substr(1, parco1[i].categoria.length());
+        if(i  == 0)
+           parco1[0].categoria = "utilitaria";   //sennó non la salva correttamente
 
         getline(fin, parco1[i].marca, ',');
             if(parco1[i].marca[0] == ' ')
@@ -73,7 +75,7 @@ void refresh_file(){
             fout1 << parco1[i].giorni[c] << ",";
         }
 
-        cout << endl;
+        fout1 << endl;
     }
 
     fout1.close();
@@ -94,7 +96,8 @@ void prenota_macchina(){
 
     cout << "Inserisci modello auto da prenotare: ";
     string mod;
-    cin >> mod;
+    cin.ignore();
+    getline(cin, mod);
     for(int i = 0; i < file_size; i++){
         if(parco1[i].modello == mod){
             for(int c = 0; c < 7; c++)
